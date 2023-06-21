@@ -60,3 +60,9 @@ curl https://<YOUR_SPRING_FUNCTION_NAME>.azurewebsites.net/api/hello?name=Azure
 ```
 
 Replace the `<YOUR_SPRING_FUNCTION_NAME>` part by the name of your Spring Function.
+
+## Setup Event Grid event for call actions, e.g: Incoming Call.
+
+See guide here: `https://learn.microsoft.com/en-us/azure/communication-services/quickstarts/voice-video-calling/handle-calling-events?source=recommendations`
+
+You need to setup an Incoming call event webhook that points to: `https://<functionAppName>.azurewebsites.net/api/incomingCall`
