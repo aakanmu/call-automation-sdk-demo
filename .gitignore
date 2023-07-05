@@ -34,4 +34,4 @@ hs_err_pid*
 bin/
 obj/
 
-src/main/java/com/casdk/demo/ConstantIgnore
+src/main/java/com/casdk/demo/ConstantsIgnore
