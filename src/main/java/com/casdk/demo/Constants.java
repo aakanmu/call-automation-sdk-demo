@@ -12,6 +12,6 @@ public class Constants {
     public static final String marketingAudio = callbackBaseUri + "/audio/marketing.wav";
     public static final String salesAudio = callbackBaseUri + "/audio/sales.wav";
     public static final String applicationPhoneNumber = "<application_phone_number>";
-    public static final String phoneNumberToAddToCall = "<phone_number_for_add_participant_or_transfer>";
+    public static final String phoneNumberToAddToCall = "<phone_number_to_add>";
 
 }

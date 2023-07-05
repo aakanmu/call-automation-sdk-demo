@@ -23,7 +23,7 @@ public class IncomingCall implements Function<String, Object> {
     @Override
     public Object apply(String body) {
 
-        logger.log(Level.INFO, "applied body is >>>> " + body);
+       System.out.println("applied body is >>>> " + body);
         List<EventGridEvent> eventGridEvents = EventGridEvent.fromString(body);
 
         for (EventGridEvent eventGridEvent : eventGridEvents) {
