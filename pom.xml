@@ -75,9 +75,15 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.9</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-communication-callautomation</artifactId>
-            <version>1.0.0-alpha.20230525.2</version>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>
