@@ -55,8 +55,8 @@
 
         <!-- customize those five properties. The functionAppName should be unique across Azure -->
         <functionResourceGroup>callautomationsdkdemo</functionResourceGroup>
-        <functionAppServicePlanName>ca-sdk-sola-test-service-plan</functionAppServicePlanName>
-        <functionAppName>ca-sdk-sola-test</functionAppName>
+        <functionAppServicePlanName>ca-sdk-data-test-service-plan</functionAppServicePlanName>
+        <functionAppName>ca-sdk-data-test</functionAppName>
         <functionAppRegion>westeurope</functionAppRegion>
         <functionPricingTier>Y1</functionPricingTier>
 
@@ -75,6 +75,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.9</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-communication-callautomation</artifactId>
             <version>1.0.0-beta.1</version>
@@ -83,7 +89,7 @@
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-messaging-eventgrid</artifactId>
-            <version>4.11.2</version>
+            <version>4.6.0</version>
         </dependency>
 
         <dependency>

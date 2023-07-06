@@ -1,11 +1,10 @@
 package com.casdk.demo;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.springframework.stereotype.Component;
 
 import com.azure.messaging.eventgrid.EventGridEvent;
@@ -18,16 +17,14 @@ import com.google.gson.JsonObject;
 @Component
 public class IncomingCall implements Function<String, Object> {
 
-    Logger logger = Logger.getLogger(IncomingCall.class.getName());
-
     @Override
     public Object apply(String body) {
-
-        logger.log(Level.INFO, "applied body is >>>> " + body);
+        CALogger logger = CALogger.getInstance();
+        logger.info("applied body is >>>> " + body);
         List<EventGridEvent> eventGridEvents = EventGridEvent.fromString(body);
 
         for (EventGridEvent eventGridEvent : eventGridEvents) {
-            logger.log(Level.INFO, "event grid type = " + eventGridEvent.getEventType());
+            logger.info("event grid type = " + eventGridEvent.getEventType());
 
             // Handle the subscription validation event
             if (eventGridEvent.getEventType().equals("Microsoft.EventGrid.SubscriptionValidationEvent")) {
@@ -35,11 +32,11 @@ public class IncomingCall implements Function<String, Object> {
                         .toObject(SubscriptionValidationEventData.class);
                 SubscriptionValidationResponse subscriptionValidationResponse = new SubscriptionValidationResponse()
                         .setValidationResponse(subscriptionValidationEventData.getValidationCode());
-                logger.log(Level.INFO, "validation successful -> " + subscriptionValidationResponse);
+                logger.info("validation successful -> " + subscriptionValidationResponse);
                 return subscriptionValidationResponse;
             }
 
-            logger.log(Level.INFO, "processing json data");
+            logger.info("processing json data");
             // Answer the incoming call and pass the callbackUri where Call Automation
             // events will be delivered
             JsonObject data = new Gson().fromJson(eventGridEvent.getData().toString(), JsonObject.class); // Extract
@@ -57,8 +54,8 @@ public class IncomingCall implements Function<String, Object> {
             String callbackUri = Constants.callbackBaseUri
                     + String.format("/calls/%s?callerId=%s", UUID.randomUUID(), callerId);
 
-            logger.log(Level.INFO, "callbackUri is >>>> " + callbackUri);
-            logger.log(Level.INFO, "incomingCallContext = " + incomingCallContext);
+            logger.info("callbackUri is >>>> " + callbackUri);
+            logger.info("incomingCallContext = " + incomingCallContext);
 
             AnswerCallResult answerCallResult = CallAutomationAsyncClientSingleton.getInstance()
                     .answerCall(incomingCallContext, callbackUri).block();

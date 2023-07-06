@@ -16,15 +16,18 @@ public class IncomingCallHandler extends FunctionInvoker<String, Object> {
                         @HttpTrigger(name = "incomingCall", methods = {
                                         HttpMethod.POST }, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
                         ExecutionContext context) {
+                CALogger logger = CALogger.getInstance();
+                logger.setContext(context);
+
                 Optional<String> requestBodyOptional = request.getBody();
                 if (requestBodyOptional.isEmpty()) {
-                        context.getLogger().info("Looks like an empty request, no action is to be taken");
+                        logger.info("Looks like an empty request, no action is to be taken");
                         return null;
                 }
 
                 String requestBody = requestBodyOptional.get();
 
-                context.getLogger().info("Incoming Call Request Body: " + requestBody);
+                logger.info("Incoming Call Request Body: " + requestBody);
 
                 return request
                                 .createResponseBuilder(HttpStatus.OK)
